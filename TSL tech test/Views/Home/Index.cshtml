@@ -1,0 +1,44 @@
+﻿@model HomeControllerModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Tech test - apologies for it being rather bare bones</h1>
+    <div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Index" }))
+{
+
+    @foreach(var season in Model.Seasons)
+    {
+        <input class="btn btn-primary" type="submit" id="btnSubmit" name="btnSubmit" value="@season.ToString()">
+    }
+        <h1>F1 - Season @Model.raceTable.season - Total Races: @Model.raceTable.Races.Count</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Round</th>
+              <th scope="col">Race name</th>
+               <th scope="col">Circuit</th>
+              <th scope="col">Date & Time</th>
+              <th scope="col">Circuit information</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach(var race in Model.raceTable.Races)
+              {
+            <tr>
+              <th scope="row">@race.round</th>
+              <td>@race.raceName</td>
+              <td>@race.Circuit.circuitName</td>
+              <td>@race.date - @race.time</td>
+              <td><a href="@race.Circuit.url" class="btn btn-primary">Link to wiki</td>
+            </tr>
+              }
+          </tbody>
+        </table>
+        <p>Data Source : @Model.DataSource</p>
+}
+    </div>
+</div>
